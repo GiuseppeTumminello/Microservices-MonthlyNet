@@ -2,26 +2,25 @@ package com.acoustic.service;
 
 import com.acoustic.rate.RatesConfigurationProperties;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class MonthlyNetService implements SalaryCalculatorService {
 
-    public static final int MONTHS_NUMBER = 12;
+    private static final int MONTHS_NUMBER = 12;
     private final RatesConfigurationProperties rate;
 
     @Override
     public BigDecimal apply(BigDecimal grossMonthlySalary) {
-        return (grossMonthlySalary.multiply(BigDecimal.valueOf(MONTHS_NUMBER))
-                .compareTo(this.rate.getTaxGrossAmountThreshold()) < 0)
-                ? getMonthlyNetBasedOnRate(
-                grossMonthlySalary,
-                this.rate.getTaxRate17Rate())
-                : getMonthlyNetBasedOnRate(grossMonthlySalary, this.rate.getTaxRate32Rate());
+        if (grossMonthlySalary.multiply(BigDecimal.valueOf(MONTHS_NUMBER)).compareTo(this.rate.getTaxGrossAmountThreshold()) < 0) {
+            return getMonthlyNetBasedOnRate(grossMonthlySalary, this.rate.getTaxRate17Rate());
+        } else {
+            return getMonthlyNetBasedOnRate(grossMonthlySalary, this.rate.getTaxRate32Rate());
+        }
     }
 
     @Override

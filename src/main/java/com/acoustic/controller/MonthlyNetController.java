@@ -5,10 +5,7 @@ import com.acoustic.entity.MonthlyNet;
 import com.acoustic.repository.MonthlyNetRepository;
 import com.acoustic.service.SalaryCalculatorService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
@@ -17,6 +14,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/monthlyNet")
+@CrossOrigin
 public class MonthlyNetController {
 
     public static final String DESCRIPTION = "description";

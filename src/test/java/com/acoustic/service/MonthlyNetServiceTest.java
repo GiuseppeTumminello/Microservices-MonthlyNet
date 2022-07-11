@@ -21,6 +21,10 @@ class MonthlyNetServiceTest {
     public static final double TOTAL_ZUS_RATE = 0.1371;
     public static final double HEALTH_RATE = 0.09;
     public static final int TAX_GROSS_AMOUNT_THRESHOLD = 120000;
+
+    public static final double TAX_AMOUNT_RATE_17 = 0.0832;
+
+    public static final double TAX_AMOUNT_RATE_32 = 0.1432;
     public static final String MONTHLY_NET_DESCRIPTION = "Monthly net";
     @InjectMocks
     private MonthlyNetService monthlyNetService;
@@ -33,9 +37,9 @@ class MonthlyNetServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"10188.77,6854.93, 0.1432", "15999.72, 10764.50, 0.1432"})
-    public void getMonthlyNetBasedOnRate32(BigDecimal input, BigDecimal expected, BigDecimal rate) {
-        given(this.ratesConfigurationProperties.getTaxRate32Rate()).willReturn(rate);
+    @CsvSource({"10188.77,6854.93", "15999.72, 10764.50"})
+    public void getMonthlyNetBasedOnRate32(BigDecimal input, BigDecimal expected) {
+        given(this.ratesConfigurationProperties.getTaxRate32Rate()).willReturn(BigDecimal.valueOf(TAX_AMOUNT_RATE_32));
         given(this.ratesConfigurationProperties.getTotalZusRate()).willReturn(BigDecimal.valueOf(TOTAL_ZUS_RATE));
         given(this.ratesConfigurationProperties.getHealthRate()).willReturn(BigDecimal.valueOf(HEALTH_RATE));
         given(this.ratesConfigurationProperties.getTaxGrossAmountThreshold()).willReturn(BigDecimal.valueOf(TAX_GROSS_AMOUNT_THRESHOLD));
@@ -43,9 +47,9 @@ class MonthlyNetServiceTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"6000,4319.44, 0.0832", "7000, 5039.35, 0.0832", "8555,6158.81, 0.0832"})
-    public void getMonthlyNetBasedOnRate17(BigDecimal input, BigDecimal expected, BigDecimal rate) {
-        given(this.ratesConfigurationProperties.getTaxRate17Rate()).willReturn(rate);
+    @CsvSource({"6000,4319.44", "7000, 5039.35", "8555,6158.81"})
+    public void getMonthlyNetBasedOnRate17(BigDecimal input, BigDecimal expected) {
+        given(this.ratesConfigurationProperties.getTaxRate17Rate()).willReturn(BigDecimal.valueOf(TAX_AMOUNT_RATE_17));
         given(this.ratesConfigurationProperties.getTotalZusRate()).willReturn(BigDecimal.valueOf(TOTAL_ZUS_RATE));
         given(this.ratesConfigurationProperties.getHealthRate()).willReturn(BigDecimal.valueOf(HEALTH_RATE));
         given(this.ratesConfigurationProperties.getTaxGrossAmountThreshold()).willReturn(BigDecimal.valueOf(TAX_GROSS_AMOUNT_THRESHOLD));
