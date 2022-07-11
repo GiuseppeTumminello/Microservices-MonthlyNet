@@ -21,6 +21,6 @@ public class MonthlyNet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private BigDecimal monthlyNet;
+    private BigDecimal monthlyNetAmount;
 
 }

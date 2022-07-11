@@ -27,7 +27,7 @@ public class MonthlyNetController {
     @PostMapping("/getMonthlyNet/{grossMonthlySalary}")
     public Map<String, String> calculateMonthlyNet(@PathVariable @Min(2000) BigDecimal grossMonthlySalary) {
         var monthlyNetSalary = this.salaryCalculatorService.apply(grossMonthlySalary);
-        this.monthlyNetRepository.save(MonthlyNet.builder().monthlyNet(monthlyNetSalary).build());
+        this.monthlyNetRepository.save(MonthlyNet.builder().monthlyNetAmount(monthlyNetSalary).build());
         return Map.of(DESCRIPTION,this.salaryCalculatorService.getDescription(), VALUE, String.valueOf(monthlyNetSalary));
     }
 
