@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/monthlyNet")
+@RequestMapping("/monthly-net")
 @CrossOrigin
 public class MonthlyNetController {
 
@@ -24,7 +24,7 @@ public class MonthlyNetController {
 
 
 
-    @PostMapping("/getMonthlyNet/{grossMonthlySalary}")
+    @PostMapping("/calculation/{grossMonthlySalary}")
     public Map<String, String> calculateMonthlyNet(@PathVariable @Min(2000) BigDecimal grossMonthlySalary) {
         var monthlyNetSalary = this.salaryCalculatorService.apply(grossMonthlySalary);
         this.monthlyNetRepository.save(MonthlyNet.builder().monthlyNetAmount(monthlyNetSalary).build());

@@ -27,7 +27,7 @@ class MonthlyNetTest {
     public static final String MONTHLY_NET_DESCRIPTION = "Monthly net";
     public static final String DESCRIPTION = "description";
     public static final String VALUE = "value";
-    private final String MONTHLY_NET_ENDPOINT = "/monthlyNet/getMonthlyNet/";
+    private final String MONTHLY_NET_ENDPOINT = "/monthly-net/calculation/";
     @Autowired
     private MockMvc mockMvc;
     @Autowired
